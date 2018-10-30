@@ -12,6 +12,7 @@
 #include "verilated_lxt2_c.h"
 #include <vector>
 #include <stdint.h>
+#include <map>
 
 class GoogletestVlTestBase : public ::testing::Test {
 public:
@@ -27,6 +28,14 @@ public:
 	virtual void TearDown();
 
 	void addClock(CData *clk, double period);
+
+	void addClock(CData &clk, double period);
+
+	std::string testname() const;
+
+	void raiseObjection(void *obj);
+
+	void dropObjection(void *obj);
 
 protected:
 
@@ -53,6 +62,7 @@ protected:
 	uint32_t										m_steplist_idx;
 	uint32_t										m_steplist_sz;
 	double											m_timestamp;
+	std::map<void *, uint32_t>						m_objections;
 };
 
 #endif /* PACKAGES_GOOGLETEST_VL_SRC_GOOGLETESTVLTESTBASE_H_ */

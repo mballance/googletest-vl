@@ -34,6 +34,8 @@ template <class T> void GoogletestVlTest<T>::SetUp() {
 	GoogletestVlTestBase::SetUp();
 	m_top = new T();
 
+	T *t;
+
 	m_tfp = new VerilatedLxt2C();
 	top()->trace(m_tfp, 99);
 	if (test->test_to_run_count() > 1) {

@@ -54,6 +54,11 @@ void GoogletestVlTestBase::run() {
 		m_timestamp += s.time_incr;
 
 		m_steplist_idx = ((m_steplist_idx + 1) % m_steplist_sz);
+
+		if (m_objections.size() == 0) {
+			fprintf(stdout, "No objections\n");
+			break;
+		}
 	}
 
 }
@@ -70,5 +75,42 @@ void GoogletestVlTestBase::TearDown() {
 
 void GoogletestVlTestBase::addClock(CData *clk, double period) {
 	m_clocks.push_back(std::pair<CData *, uint64_t>(clk, period));
+}
+
+void GoogletestVlTestBase::addClock(CData &clk, double period) {
+	m_clocks.push_back(std::pair<CData *, uint64_t>(&clk, period));
+}
+
+std::string GoogletestVlTestBase::testname() const {
+	::testing::UnitTest *test = ::testing::UnitTest::GetInstance();
+	std::string ret = test->current_test_case()->name();
+
+	ret += ".";
+	ret += test->current_test_info()->name();
+
+	return ret;
+}
+
+void GoogletestVlTestBase::raiseObjection(void *obj) {
+	std::map<void *, uint32_t>::iterator it;
+
+	if ((it=m_objections.find(obj)) == m_objections.end()) {
+		m_objections[obj] = 1;
+	} else {
+		it->second++;
+	}
+}
+
+void GoogletestVlTestBase::dropObjection(void *obj) {
+	std::map<void *, uint32_t>::iterator it;
+
+	if ((it=m_objections.find(obj)) != m_objections.end()) {
+		if (it->second <= 1) {
+			// Remove
+			m_objections.erase(it);
+		} else {
+			it->second--;
+		}
+	}
 }
 
