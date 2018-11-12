@@ -45,10 +45,11 @@ int main(int argc, char **argv) {
 		Verilated::traceEverOn(true);
 	}
 
-	char **new_argv = new char *[args.size()];
+	char **new_argv = new char *[args.size()+1];
 	for (int i=0; i<args.size(); i++) {
 		new_argv[i] = strdup(args.at(i).c_str());
 	}
+	new_argv[args.size()] = 0;
 	int new_argc = args.size();
 
 	::testing::InitGoogleTest(&new_argc, new_argv);

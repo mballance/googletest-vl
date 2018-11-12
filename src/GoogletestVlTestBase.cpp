@@ -43,7 +43,7 @@ void GoogletestVlTestBase::run() {
 		m_init = true;
 	}
 
-	for (int i=0; i<10000; i++) {
+	for (int i=0; i<100000; i++) {
 		const ClockStep &s = m_steplist.at(m_steplist_idx);
 		*s.clock = s.clock_val;
 		eval();

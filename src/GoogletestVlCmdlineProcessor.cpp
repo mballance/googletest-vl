@@ -44,8 +44,8 @@ bool GoogletestVlCmdlineProcessor::get_plusarg_values(const std::string &plusarg
 		}
 		if (i == plusarg.size() && it->at(i) == '=') {
 			fprintf(stdout, "plusarg %s matches pattern %s\n", it->c_str(), plusarg.c_str());
+			values.push_back(it->substr(i+1));
 		}
-		values.push_back(it->substr(i+1));
 		ret = true;
 	}
 
