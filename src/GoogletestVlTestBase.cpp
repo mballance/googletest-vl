@@ -32,7 +32,7 @@ void GoogletestVlTestBase::SetUp() {
 			test->current_test_info()->name());
 }
 
-void GoogletestVlTestBase::run() {
+void GoogletestVlTestBase::run(uint64_t cycles) {
 	if (!m_init) {
 		m_steplist.push_back(ClockStep(
 				m_clocks.at(0).first, 1, m_clocks.at(0).second/2));
@@ -43,7 +43,7 @@ void GoogletestVlTestBase::run() {
 		m_init = true;
 	}
 
-	for (int i=0; i<100000; i++) {
+	for (int i=0; i<cycles; i++) {
 		const ClockStep &s = m_steplist.at(m_steplist_idx);
 		*s.clock = s.clock_val;
 		eval();

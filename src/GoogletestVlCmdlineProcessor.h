@@ -28,6 +28,8 @@ public:
 	// Returns the first plusarg that matches the specified
 	bool get_plusarg_value(const std::string &plusarg, std::string &value) const;
 
+	bool has_plusarg(const std::string &plusarg) const;
+
 protected:
 
 	GoogletestVlCmdlineProcessor(int argc, char **argv);

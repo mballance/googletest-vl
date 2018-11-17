@@ -23,7 +23,7 @@ public:
 	virtual void SetUp();
 
 	// Run for a maximum of <timeout>
-	virtual void run();
+	virtual void run(uint64_t cycles=1000000);
 
 	virtual void TearDown();
 

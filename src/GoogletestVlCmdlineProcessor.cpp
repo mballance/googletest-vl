@@ -63,5 +63,17 @@ bool GoogletestVlCmdlineProcessor::get_plusarg_value(const std::string &plusarg,
 	return values.size() > 0;
 }
 
+bool GoogletestVlCmdlineProcessor::has_plusarg(const std::string &plusarg) const {
+
+	for (std::vector<std::string>::const_iterator it=m_plusargs.begin();
+			it!=m_plusargs.end(); it++) {
+		if ((*it) == plusarg) {
+			return true;
+		}
+	}
+
+	return false;
+}
+
 
 GoogletestVlCmdlineProcessor *GoogletestVlCmdlineProcessor::m_instance = 0;
